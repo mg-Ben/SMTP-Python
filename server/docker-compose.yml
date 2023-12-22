@@ -1,0 +1,12 @@
+version: 0.1.0
+services:
+  python-server:
+    build: .
+    tty: true #This allows the prints of server forever-event loop to be shown in your host terminal when deploying this container
+    ports:
+      - ${SMTP_PORT}:8025
+    deploy:
+      resources:
+        limits:
+          cpus: '0.0' #This allows your container to use the same CPU resources as your host machine
+          memory: '0' #This allows your container to use the same RAM memory resources as your host machine
