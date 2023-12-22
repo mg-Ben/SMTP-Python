@@ -6,7 +6,8 @@ SMTP mail server connection with Python
 2. [Deploy your local SMTP Client](#deploy-your-local-smtp-server)
 
 # Deploy your local SMTP Server
-On condition that you want to deploy the SMTP server:
+On condition that you want to deploy the SMTP Server:
+- Go to /server folder and:
 
 ```
 docker compose up --build
@@ -90,6 +91,13 @@ ports:
 Where SMTP_PORT is an environment variable you define in ```.env``` file. To sum up: to connect to the server, just use the SMTP_PORT you have set in ```.env``` file.
 
 # Deploy your local SMTP Client
+
+On condition that you want to deploy the SMTP Client:
+- Go to /client folder and:
+
+```
+docker compose up --build
+```
 
 Once you have your server running, you can try to connect to it from a Client Python code just specifying the IP destination and destination port. Since you might be running the server on another host machine and maybe your system hasn't Python installed, the client runs inside another container with its own ```Dockerfile``` and ```docker-compose.yml``` files. However, executing a client inside a container would imply you to bind ports and make some complex configurations and can difficult the task of connecting to remote server by just specifying IP:port to connect to.
 
