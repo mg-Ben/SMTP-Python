@@ -2,8 +2,8 @@
 SMTP mail server connection with Python
 
 # Table of contents
-1. [Deploy your local SMTP Server](#deploy-your-local-smtp-server)
-2. [Deploy your local SMTP Client](#deploy-your-local-smtp-server)
+1. [Deploy your local SMTP Server with aiosmtpd library](#deploy-your-local-smtp-server)
+2. [Deploy your local SMTP Client with smtplib library](#deploy-your-local-smtp-server)
 
 # Deploy your local SMTP Server
 On condition that you want to deploy the SMTP Server:
@@ -111,4 +111,5 @@ Thanks to this configuration, running the python client code container is exactl
 
 
 # References
-[1] [Real Python](https://realpython.com/python-send-email/)
+[1] [Server aiosmtpd library reference](https://aiosmtpd-pepoluan.readthedocs.io/en/latest/index.html)
+[2] [Client smtplib library reference](https://aiosmtpd-pepoluan.readthedocs.io/en/latest/index.html)

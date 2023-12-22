@@ -1,7 +1,7 @@
 import asyncio
 class ExampleHandler:
     async def handle_RCPT(self, server, session, envelope, address, rcpt_options):
-        if not address.endswith('@example.com'):
+        if not address.endswith('@gmail.com'):
             return '550 not relaying to that domain'
         envelope.rcpt_tos.append(address)
         return '250 OK'
