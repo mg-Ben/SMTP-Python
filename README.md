@@ -9,14 +9,14 @@ SMTP mail server connection with Python
 On condition that you want to deploy the SMTP Server:
 - Go to /server folder and:
 
-```
+```bash
 docker compose up --build
 ```
 
 ### What is happening behind?
 1. ```Your docker-compose.yml``` builds the server image from your ```Dockerfile```:
 
-```
+```yml
 python-server:
     build: . (which means "Dockerfile is in the same directory as docker-compose.yml")
 ```
@@ -28,14 +28,14 @@ python-server:
     
     3.2. Create a Controller object from that HandlerClass:
 
-    ```
+    ```python
     handler = HandlerConstructor()
     controller = Controller(handler, hostname="0.0.0.0") #Please, specify explicitly localhost because otherwise It might use IPv6 default addresses
     ```
 
     3.3. ```controller.start()``` -> However, It is compulsory to run this line inside an async function (a.k.a. **asynchronous event loop**). Whenever you define an async function in your code and invoke it, you will have to return a promise and so on up to main function. E.g.:
 
-    ```
+    ```python
     async my_function0(){   #1. You define your async function inside which run controller.start()
         ...
         controller.start()  
@@ -55,7 +55,7 @@ python-server:
 
     Therefore, It's enough with controlling [asyncio Runners](https://docs.python.org/3/library/asyncio-runner.html#asyncio.run), which are coroutines that are executed as event loops (**Watch out! In this context, event loops don't mean processes which are repeatedly such as for or while, but asynchronous tasks!**).
 
-    ```
+    ```python
     async def main():
         ...
         controller.start()
@@ -65,7 +65,7 @@ python-server:
 
     In short, the complete code looks like this:
 
-    ```
+    ```python
     import Handler.HandlerClass as handler_package
     from aiosmtpd.controller import Controller
     import asyncio
@@ -83,7 +83,7 @@ python-server:
 
 4. As you are running your SMTP Python server inside a docker container which is running inside your system (host), you need to bind the port of your container to your system port and then you just need to use the system port regardless of the container port. By default, the Python SMTP server runs in 8025 port (you can change it in Controller() and docker-compose.yml). This means that your container is using the 8025 port. Now you have to bind that fixed container port=8025 to the host system port you want. For this purpose, refer to ```docker-compose.yml``` and bind them:
 
-```
+```yml
 ports:
       - ${SMTP_PORT}:8025
 ```
@@ -95,7 +95,7 @@ Where SMTP_PORT is an environment variable you define in ```.env``` file. To sum
 On condition that you want to deploy the SMTP Client:
 - Go to /client folder and:
 
-```
+```bash
 docker compose up --build
 ```
 
@@ -103,7 +103,7 @@ Once you have your server running, you can try to connect to it from a Client Py
 
 For this reason, the client container docker-compose.yml specifies to use the same network as your host machine:
 
-```
+```yml
 network_mode: host
 ```
 
